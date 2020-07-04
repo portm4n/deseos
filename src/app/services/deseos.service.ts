@@ -18,19 +18,23 @@ export class DeseosService {
     return nuevaLista.id;
   }
 
-  obeternLista(id:string | number){
-    id = Number(id);
-    return this.listas.find(listaData => listaData.id === id )
+  borrarLista(lista: Lista) {
+    this.listas = this.listas.filter((listaData) => listaData.id !== lista.id);
+    this.guardarStorage();
   }
 
-  guardarStorage(){
-    localStorage.setItem('data', JSON.stringify(this.listas) )
+  obeternLista(id: string | number) {
+    id = Number(id);
+    return this.listas.find((listaData) => listaData.id === id);
   }
-  cargarStorage(){
-    if (localStorage.getItem('data')){
-      this.listas = JSON.parse(localStorage.getItem('data'))
-    }
-    else{
+
+  guardarStorage() {
+    localStorage.setItem("data", JSON.stringify(this.listas));
+  }
+  cargarStorage() {
+    if (localStorage.getItem("data")) {
+      this.listas = JSON.parse(localStorage.getItem("data"));
+    } else {
       this.listas = [];
     }
   }
